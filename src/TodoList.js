@@ -5,7 +5,7 @@ import {TodoItem} from './TodoItem';
         super(props);
     }
      render(){
-         const todolist = this.props.todos.map((todo)=> 
+        const todolist = this.props.todos.map((todo)=> 
         <TodoItem title={todo.title} isDone={todo.isDone}/>
             )
         return( 

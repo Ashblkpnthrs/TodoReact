@@ -2,46 +2,48 @@ import React, { Component } from 'react';
 import './App.css';
 import './TodoItem';
 import './TodoList';
-import { TodoList } from './TodoList';
 
 class TodoForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { todo: '', submitChecked: false };
-        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            todo: props.todo
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleReset = this.handleReset.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        if (event.target.name === 'todo') {
-            console.log('todo add', event.target.value, event);
-            //TODO : le todo rentrer est récupéer
-            //event.target.value = 
-        }
+
+        this.setState ({ todo: event.target.value });
     }
 
     handleSubmit(event) {
 
-        if (event.target.name === 'todo') {
-            //alert('A todo was submitted: ' + this.state.todo);
-            console.log('todo submitted', event.target.value, event);
-            event.preventDefault();
-        }
+        event.preventDefault();
+        this.props.createTodo(this.state.todo);
+
+    }
+
+    handleReset(event) {
+
+        event.preventDefault();
+        this.props.clearTodos();
+        
     }
 
     render() {
         return (
-            <div className="App">
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Todo:
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Todo:
 <input type="text" name="todo" value={this.state.text} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                        <input type="reset" value="Reset" />
-                    </form>
-                </div>
+                    </label>
+                    <input type="submit" value="Submit" onChange={this.handleSubmit} />
+                </form>
+                <button onClick={this.handleReset}>Reset</button>
             </div>
         );
     }
