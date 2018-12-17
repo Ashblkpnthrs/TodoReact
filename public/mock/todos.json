@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Send a mail",
+        "isDone": false
+    },
+    {
+        "title": "Send a message",
+        "isDone": false
+    },
+    {
+        "title": "Send an SOS to the world",
+        "isDone": false
+    }
+]

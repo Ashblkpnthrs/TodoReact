@@ -1,34 +1,30 @@
-import React from 'react';
+import React from 'react'
 
-export default class TodoItem extends React.Component {
-    constructor(props) {
-      super(props);
-      this.popUp = this.popUp.bind(this);
-  
+ export class TodoItem extends React.Component{
+     constructor(props){
+        super(props);
+         this.state = {
+            isDone: this.props.isDone
+        }
+         this.handleChange = this.handleChange.bind(this);
     }
-  
-    componentDidMount() {
-      console.log(this.props.name)
+     handleChange(e){
+        this.setState({isDone: e.target.checked});
     }
-  
-    shouldComponentUpdate(nextProps, nextState) {
-      console.log("update " + this.props.name);
-      return true;
+     
+    
+    render(){
+        const isDone  = this.state.isDone;
+        return(
+            <>
+            {isDone ? (
+                <strike><ul>{this.props.title.toUpperCase()} <input type="checkbox" checked={this.state.isDone} onChange={this.handleChange}/></ul></strike>
+            ):(
+                <ul>{this.props.title.toUpperCase()} <input type="checkbox" checked={this.props.isDone} onChange={this.handleChange}/></ul>
+            )}
+            </>
+        );
     }
-  
-    /*popUp(e) {
-      alert("Click on " + this.props.name)
-      console.log(e.nativeEvent.type)
-    }*/
-  
-    render() {
-      /*if (this.props.name === 'Angular') {
-        return null
-      }*/
-      return (
-        <h3 onClick={this.popUp}>{this.props.name}</h3>
-      )
-    }
-};
-
+    
+} 
 export default TodoItem;
